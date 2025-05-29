@@ -1,0 +1,6 @@
+id=line
+name=Render Priority
+version=v1.0.1
+versionCode=101
+author=@UnixeID
+description=Automatically sets renderer duration based on device Vulkan/OpenGL support.
