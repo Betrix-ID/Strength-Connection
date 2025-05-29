@@ -14,11 +14,11 @@ fn main() {
     }
 
     match args[1].as_str() {
-        "-U" => {           
+        "-S" => {           
             cout_5();
             println!("- Apply use latency 5ns priority");
         }
-        "-S" => {            
+        "-U" => {            
             cout_30();
             println!("- Apply use latency 30ns priority");
         }

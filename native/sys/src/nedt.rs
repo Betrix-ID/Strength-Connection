@@ -66,9 +66,9 @@ fn ping_fooling() {
     pinging.insert("0.0.0.0", "doh.tiar.app");
     
     let mut best_ping = "";
-    let mut best_avg = f64::MAX;
+    let mut make_avg = f64::MAX;
     
-    for ip in ["1.1.1.1", "9.9.9.9", "8.8.8.8", "94.140.14.14"] {
+    for ip in ["9.9.9.9", "8.8.8.8", "1.1.1.1", "94.140.14.14"] {
         println!("\nDNS Profider {} ....", ip);
                 
     let cmd = format!(
@@ -84,12 +84,16 @@ fn ping_fooling() {
                         if end.len() >= 2 {
               if let Ok(avg) = end[1].parse::<f64>() {
                 println!("Average for {}: {:2} ms", ip , avg);
-               if avg == 29.0 || avg == 32.0 {
+               if (avg - 29.0).abs() < 1.0 || (avg - 32.0).abs() < 1.0 {
                   println!("Skpping {} due to suspicious avg ping {} ms",ip ,avg);
-                  continue;
-                 }                
-                        if avg < best_avg {
-                          best_avg = avg;
+                 continue;
+              }                                           
+                  if avg > 30.0 {
+                       println!("lgnoring {} because avg > 30ms", ip);
+                     continue;
+                  }
+                        if avg < make_avg {
+                          make_avg = avg;
                           best_ping = ip;
                      }
                  }
@@ -98,7 +102,7 @@ fn ping_fooling() {
      }
  }
     
-   if best_ping.is_empty() {
+  if best_ping.is_empty() {
       println!("\nAl dns tests failed. Using fallback.");
       best_ping = "0.0.0.0";
    }
@@ -119,7 +123,7 @@ pub fn cout_5() {
     Applies connectivity and network-related system properties aimed at
     optimizing Wi-Fi and mobile data behavior. This configuration sets
     signal thresholds, disables network watchdogs, and prioritizes certain
-    multipath preferences. The screen-on delay is configured to 60ms to
+    multipath preferences. The screen-on delay is configured to 5ms to
     potentially improve responsiveness on wake."
     );
         
@@ -153,14 +157,14 @@ pub fn cout_5() {
     latency(5);
     ping_fooling();
     frozen(1);
-    line("Successfully: Apply Latency 60ns....");
+    line("Successfully: Apply Latency 5ms....");
 }
 
 pub fn cout_30() {       
         println!(
         "\tDescription:
-    Similar to netd_60, this profile applies optimized network properties
-    with a slightly increased screen-on delay (80ms). Intended for devices
+    Similar to netd_5, this profile applies optimized network properties
+    with a slightly increased screen-on delay (30ms). Intended for devices
     where a longer wake delay helps stabilize network connectivity upon
     screen activation."
     );
@@ -195,14 +199,14 @@ pub fn cout_30() {
     latency(30);
     ping_fooling();
     frozen(1);
-    line("Successfully: Apply Latency 80ns....");
+    line("Successfully: Apply Latency 30ms....");
 }
 
 pub fn cout_50() {       
         println!(
         "\tDescription:
     This version applies the same core network optimizations, but configures
-    the screen-on delay to 125ms. Best used for older or slower devices that
+    the screen-on delay to 50ms. Best used for older or slower devices that
     require more time to establish a reliable network connection after wake."
     );
      
@@ -236,7 +240,7 @@ pub fn cout_50() {
     latency(50);
     ping_fooling();
     frozen(1);
-    line("Successfully: Apply Latency 125ns.....");
+    line("Successfully: Apply Latency 50ms.....");
 }
 
 pub fn deafult() {

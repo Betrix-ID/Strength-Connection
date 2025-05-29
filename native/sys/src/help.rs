@@ -6,9 +6,9 @@ Usage:
   NetOptimizer [OPTION]
 
 Options:
-  -S        Apply balanced network optimization with 60ms screen-on delay.
-  -U        Apply moderate network delay profile with 80ms screen-on delay.
-  -L        Apply conservative delay profile with 125ms screen-on delay.
+  -S        Apply balanced network optimization with 5ms screen-on delay.
+  -U        Apply moderate network delay profile with 30ms screen-on delay.
+  -L        Apply conservative delay profile with 50ms screen-on delay.
   -d        Reset latency wifi and network to defatult settings
   -h, --help     Show this help message and exit.
 
@@ -18,9 +18,9 @@ Description:
   resolver, and connectivity performance to improve overall network responsiveness and stability.
 
   Each profile adjusts the screen-on delay and related properties for different performance needs:
-    - netd60: Best for low-latency, responsive wake performance.
-    - netd80: Balanced between responsiveness and network readiness.
-    - netd125: Ideal for older or slower devices requiring longer delays.
+    - netd5: Best for low-latency, responsive wake performance.
+    - netd30: Balanced between responsiveness and network readiness.
+    - netd50: Ideal for older or slower devices requiring longer delays.
     - default: reset configuration latency proider 
 
 Examples:
